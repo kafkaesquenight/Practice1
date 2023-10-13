@@ -1,6 +1,5 @@
 package pan.eduard.Practice1.repository;
 import java.util.logging.Logger;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 @Repository
