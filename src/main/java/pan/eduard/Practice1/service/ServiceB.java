@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import pan.eduard.Practice1.repository.RepoB;
 import org.springframework.stereotype.Service;
-import pan.eduard.Practice1.repository.RepoC;
+
 
 @Service
 public class ServiceB {
