@@ -4,17 +4,24 @@ import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pan.eduard.Practice1.repository.RepoA;
 
 @Service
 public class ServiceD {
+    Logger log = Logger.getLogger(ServiceD.class.getName());
     @Autowired
     private ServiceC serviceC;
-
-    Logger log = Logger.getLogger(ServiceD.class.getName());
-
     public void methodServiceD(){
         log.info("class {ServiceD} method called");
         serviceC.methodServiceC();
+    }
+    public ServiceD(ServiceC serviceC){
+        log.info("class {ServiceD} method called");
+        this.serviceC = serviceC;
+
+    }
+    public ServiceD() {
+        log.info("class {ServiceD} method called");
     }
 
 }
