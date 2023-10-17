@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServiceA {
     Logger log = Logger.getLogger(ServiceA.class.getName());
-    @Autowired
     private RepoA repoA;
     @Value("class {ServiceA} method called")
     private String serviceAMsg;
-
     public void methodServiceA(){
         log.info(serviceAMsg);
         repoA.methodRepoA();
@@ -22,6 +20,7 @@ public class ServiceA {
     public ServiceA(){
         log.info(serviceAMsg);
     }
+    @Autowired
     public ServiceA(RepoA repoA) {
         log.info(serviceAMsg);
         repoA.methodRepoA();

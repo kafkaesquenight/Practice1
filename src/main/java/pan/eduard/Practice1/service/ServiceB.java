@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServiceB {
     Logger log = Logger.getLogger(ServiceC.class.getName());
-    @Autowired
     private ServiceA serviceA;
-    @Autowired
     private RepoB repoB;
 
     public void methodServiceB(){
@@ -19,13 +17,13 @@ public class ServiceB {
         serviceA.methodServiceA();
         repoB.methodRepoB();
     }
-    public ServiceB(ServiceA serviceA, RepoB repoB){
-        log.info("class {ServiceD} method called");
-        this.serviceA = serviceA;
+    @Autowired
+    public ServiceB(RepoB repoB){
+        log.info("class {ServiceB} method called");
         this.repoB = repoB;
 
     }
     public ServiceB() {
-        log.info("class {ServiceD} method called");
+        log.info("class {ServiceB} method called");
     }
 }
