@@ -1,6 +1,11 @@
 package pan.eduard.Practice1.service;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,5 +55,17 @@ public class ServiceC {
         serviceB = null;
         repoC = null;
         attribute = null;
+    }
+    @PostConstruct
+    public void postConstruct() {
+        log.info("Bean initialized using @PostConstruct method");
+    }
+
+    @PreDestroy
+    public void preDestroy() throws IOException {
+        log.info("@PreDestroy method called");
+        if(serviceB == null){
+            Files.deleteIfExists((Path) serviceB);
+        }
     }
 }
