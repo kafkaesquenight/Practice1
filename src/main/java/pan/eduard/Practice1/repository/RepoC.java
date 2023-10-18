@@ -8,4 +8,7 @@ public class RepoC {
     public void methodRepoC(){
         log.info("class {RepoC} method called");
     }
+    public String getMessageFromDb() {
+        return "This message selected from database";
+    }
 }

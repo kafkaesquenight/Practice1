@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 public class RepoA {
     public RepoA() {
     }
+    public String getMessageFromDb() {
+        return "This message selected from database";
+    }
     Logger log = Logger.getLogger(RepoA.class.getName());
 
     public void methodRepoA(){

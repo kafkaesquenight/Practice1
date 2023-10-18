@@ -7,7 +7,9 @@ public class RepoB {
     public RepoB() {
     }
     Logger log = Logger.getLogger(RepoB.class.getName());
-
+    public String getMessageFromDb() {
+        return "This message selected from database";
+    }
     public void methodRepoB(){
         log.info("class {RepoB} method called");
 

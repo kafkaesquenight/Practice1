@@ -8,13 +8,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServiceA {
     Logger log = Logger.getLogger(ServiceA.class.getName());
+
+    private RepoA repoA;
+
     @Value("${attribute.value:this is default}")
     private String attribute;
-    private RepoA repoA;
-    @Value("class {ServiceA} method called")
-    private String serviceAMsg;
+    public ServiceA(){
+        log.info("class {ServiceA} method called");
+    }
+    @Autowired
+    public ServiceA(RepoA repoA) {
+        log.info("class {ServiceA} method called");
+        repoA.methodRepoA();
+    }
     public void methodServiceA(){
-        log.info(serviceAMsg);
+        log.info("Attribute:" + attribute + ' ' + "Class ServiceA method called");
         repoA.methodRepoA();
     }
 
@@ -25,12 +33,6 @@ public class ServiceA {
     public void setAttribute(String attribute) {
         this.attribute = attribute;
     }
-    public ServiceA(){
-        log.info(serviceAMsg);
-    }
-    @Autowired
-    public ServiceA(RepoA repoA) {
-        log.info(serviceAMsg);
-        repoA.methodRepoA();
-    }
+
+
 }
