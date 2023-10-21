@@ -1,23 +1,25 @@
 package pan.eduard.Practice1.service;
-import java.util.logging.Logger;
 
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import pan.eduard.Practice1.repository.RepoB;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import pan.eduard.Practice1.repository.RepositoryClass;
 
-
-@Service
+@Primary
+@Service("MyCustomBeanB")
+@Slf4j
 public class ServiceB {
-    Logger log = Logger.getLogger(ServiceC.class.getName());
     private ServiceA serviceA;
 
-    private RepoB repoB;
+    private RepositoryClass repoB;
     private String attribute;
     @Value("class {ServiceB} method called")
     private String methodBMsg;
     @Autowired
-    public ServiceB(RepoB repoB){
+    public ServiceB(RepositoryClass repoB){
         log.info(methodBMsg);
         this.repoB = repoB;
     }
@@ -27,7 +29,7 @@ public class ServiceB {
     public void methodServiceB(){
         log.info("Attribute:" + attribute + ' ' + methodBMsg);
         serviceA.methodServiceA();
-        repoB.methodRepoB();
+        repoB.doSmthg();
     }
 
     public String getAttribute() {

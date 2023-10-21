@@ -1,15 +1,17 @@
 package pan.eduard.Practice1.service;
-import java.util.logging.Logger;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import pan.eduard.Practice1.repository.RepoA;
 import org.springframework.stereotype.Service;
-@Service
-public class ServiceA {
-    Logger log = Logger.getLogger(ServiceA.class.getName());
+import pan.eduard.Practice1.repository.RepositoryClass;
 
-    private RepoA repoA;
+
+@Service
+@Slf4j
+public class ServiceA{
+
+    private RepositoryClass repoA;
 
     @Value("${attribute.value:this is default}")
     private String attribute;
@@ -17,13 +19,14 @@ public class ServiceA {
         log.info("class {ServiceA} method called");
     }
     @Autowired
-    public ServiceA(RepoA repoA) {
+    public ServiceA(RepositoryClass repoA) {
         log.info("class {ServiceA} method called");
-        repoA.methodRepoA();
+        this.repoA = repoA;
+
     }
     public void methodServiceA(){
         log.info("Attribute:" + attribute + ' ' + "Class ServiceA method called");
-        repoA.methodRepoA();
+        repoA.doSmthg();
     }
 
     public String getAttribute() {
@@ -33,6 +36,7 @@ public class ServiceA {
     public void setAttribute(String attribute) {
         this.attribute = attribute;
     }
+
 
 
 }
