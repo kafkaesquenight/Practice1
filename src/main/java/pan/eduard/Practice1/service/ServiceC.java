@@ -2,6 +2,7 @@ package pan.eduard.Practice1.service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.zip.DataFormatException;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -23,13 +24,9 @@ public class ServiceC {
     private String attribute;
     @Autowired
     public ServiceC(@Qualifier("MyCustomBeanB") ServiceB serviceB, RepositoryClass repoC){
-        log.info("class {ServiceC} method called");
         this.serviceB = serviceB;
         this.repoC = repoC;
 
-    }
-    public ServiceC() {
-        log.info("class {ServiceC} method called");
     }
     public String getAttribute() {
         return attribute;
@@ -44,29 +41,8 @@ public class ServiceC {
         serviceB.methodServiceB();
         repoC.doSmthg();
     }
-    private void init() {
-        System.out.println("this method called before init method");
-        Assert.notNull(serviceB, "Service B is null");
-        Assert.notNull(repoC, "repoC is null");
-        Assert.hasText(attribute, "attribute is empty");
-    }
 
-    private void destroy() {
-        System.out.println("method called after all");
-        serviceB = null;
-        repoC = null;
-        attribute = null;
-    }
-    @PostConstruct
-    public void postConstruct() {
-        log.info("Bean initialized using @PostConstruct method");
-    }
-
-    @PreDestroy
-    public void preDestroy() throws IOException {
-        log.info("@PreDestroy method called");
-        if(serviceB == null){
-            Files.deleteIfExists((Path) serviceB);
-        }
+    public String throwError() throws DataFormatException {
+        throw new DataFormatException("new Exception");
     }
 }

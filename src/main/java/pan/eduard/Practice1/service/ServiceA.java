@@ -15,12 +15,8 @@ public class ServiceA{
 
     @Value("${attribute.value:this is default}")
     private String attribute;
-    public ServiceA(){
-        log.info("class {ServiceA} method called");
-    }
     @Autowired
     public ServiceA(RepositoryClass repoA) {
-        log.info("class {ServiceA} method called");
         this.repoA = repoA;
 
     }

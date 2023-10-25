@@ -3,6 +3,7 @@ package pan.eduard.Practice1.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -19,12 +20,9 @@ public class ServiceB {
     @Value("class {ServiceB} method called")
     private String methodBMsg;
     @Autowired
-    public ServiceB(RepositoryClass repoB){
-        log.info(methodBMsg);
+    public ServiceB(ServiceA serviceA,@Qualifier("repoB") RepositoryClass repoB){
+        this.serviceA = serviceA;
         this.repoB = repoB;
-    }
-    public ServiceB() {
-        log.info(methodBMsg);
     }
     public void methodServiceB(){
         log.info("Attribute:" + attribute + ' ' + methodBMsg);
