@@ -2,6 +2,9 @@ package pan.eduard.Practice1.domain;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "event_place")
 public class EventPlace {
@@ -16,6 +19,8 @@ public class EventPlace {
     private String country;
     @Column(name = "city")
     private String city;
+    @OneToMany
+    private List<MyEvent> events = new ArrayList<>();
 
     public int getPlaceId() {
         return id;
@@ -47,5 +52,13 @@ public class EventPlace {
 
     public void setPlaceCity(String city) {
         this.city = city;
+    }
+
+    public List<MyEvent> getMyEvents() {
+        return events;
+    }
+
+    public void setMyEvents(List<MyEvent> events) {
+        this.events = events;
     }
 }

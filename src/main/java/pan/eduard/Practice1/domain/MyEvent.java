@@ -1,12 +1,13 @@
 package pan.eduard.Practice1.domain;
 
 import jakarta.persistence.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "event")
-public class Event {
+@Table(name = "my_event")
+public class MyEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -16,6 +17,10 @@ public class Event {
     private String name;
     @Column(name = "date")
     private Date date;
+    @ManyToOne
+    @JoinColumn(name = "event_place_id")
+    @JsonIgnore
+    private EventPlace eventPlace;
 
     public int getEventId() {
         return id;

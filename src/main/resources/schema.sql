@@ -9,10 +9,11 @@ CREATE TABLE team (
                        id INT PRIMARY KEY,
                        name VARCHAR(255)
 );
-CREATE TABLE event (
+CREATE TABLE my_event (
                        id INT PRIMARY KEY,
                        name varchar(255),
-                       date date
+                       date date,
+                       place_id INT
 );
 CREATE TABLE event_place (
                        id INT PRIMARY KEY,

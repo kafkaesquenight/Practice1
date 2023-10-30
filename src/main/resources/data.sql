@@ -12,7 +12,7 @@ VALUES
     (3, 'Vitality'),
     (4, 'G2 Esports'),
     (5, 'Team Liquid');
-INSERT INTO event (event_id, event_name, event_date)
+INSERT INTO my_event (event_id, event_name, event_date)
 VALUES
     (1, 'ELEAGUE Major: Atlanta 2017', '2017-01-22'),
     (2, 'PGL Major Kraków 2017', '2017-07-16'),
