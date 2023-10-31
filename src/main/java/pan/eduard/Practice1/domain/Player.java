@@ -1,8 +1,15 @@
 package pan.eduard.Practice1.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.minidev.json.annotate.JsonIgnore;
-
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "player")
 public class Player {
@@ -19,6 +26,8 @@ public class Player {
     private String first_name;
     @Column(name = "last_name")
     private String last_name;
+    @Column(name = "team_id")
+    private int team_id;
 
     @ManyToOne
     @JoinColumn(name = "player_team_id")
@@ -61,8 +70,17 @@ public class Player {
         return last_name;
     }
 
+    public int getTeam_id() {
+        return team_id;
+    }
+
+    public void setTeam_id(int team_id) {
+        this.team_id = team_id;
+    }
+
     public void setPlayerLast_name(String last_name) {
         this.last_name = last_name;
+
     }
 
     public Team getPlayerTeam() {

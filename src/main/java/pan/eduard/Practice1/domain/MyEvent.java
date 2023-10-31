@@ -1,10 +1,17 @@
 package pan.eduard.Practice1.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.minidev.json.annotate.JsonIgnore;
 
 import java.util.Date;
-
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "my_event")
 public class MyEvent {
@@ -17,6 +24,8 @@ public class MyEvent {
     private String name;
     @Column(name = "date")
     private Date date;
+    @Column(name = "place_id")
+    private int place_id;
     @ManyToOne
     @JoinColumn(name = "event_place_id")
     @JsonIgnore
@@ -44,5 +53,13 @@ public class MyEvent {
 
     public void setEventDate(Date date) {
         this.date = date;
+    }
+
+    public int getPlace_id() {
+        return place_id;
+    }
+
+    public void setPlace_id(int place_id) {
+        this.place_id = place_id;
     }
 }

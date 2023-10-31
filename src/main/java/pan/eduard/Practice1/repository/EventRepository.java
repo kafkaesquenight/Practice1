@@ -1,28 +1,43 @@
 package pan.eduard.Practice1.repository;
 
-import jakarta.transaction.Transactional;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import pan.eduard.Practice1.Mapper.EventRowMapper;
 import pan.eduard.Practice1.domain.MyEvent;
 
+import java.sql.Date;
 import java.util.List;
 
+
 @Repository
-public interface EventRepository extends JpaRepository<MyEvent, Integer> {
-    @Query("SELECT * FROM MyEvent mE")
-    List<MyEvent> findAllEvents();
-    @Query("SELECT * FROM MyEvent mE where mE.id =: eId")
-    List<MyEvent> findEventById(@Param("id") int eId);
-    @Query("SELECT * FROM MyEvent mE where mE.name =: eName")
-    List<MyEvent> findEventByName(@Param("name") String eName);
-    @Modifying
-    @Transactional
-    @Query(value = "INSERT INTO my_event (id, name, date, place_id) VALUES (?, ?, ?, ?)", nativeQuery = true)
-    MyEvent save(int id, String name, String country, int place_id);
-    @Modifying
-    @Query("delete from MyEvent mE where mE.id =: eId")
-    void deleteEventById(@Param("id") int eId);
+public class EventRepository{
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    public List<MyEvent> findAll() {
+
+        String sql = "SELECT * FROM event";
+
+        List<MyEvent> events = jdbcTemplate.query(sql, new EventRowMapper());
+
+        return events;
+
+    }
+    void insertEvent(String name, Date date, int event_id) {
+        jdbcTemplate.update("INSERT INTO event (name, date, event_id) VALUES (?, ?, ?)", name, date, event_id
+        );
+    }
+    public boolean deleteEvent(int id){
+        String sql = "DELETE FROM event WHERE id = ?";
+        Object[] args = new Object[] {id};
+        return jdbcTemplate.update(sql, args) == 1;
+    }
+    public MyEvent findByEventId(int id) {
+        String sql = "SELECT * FROM event WHERE id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new EventRowMapper());
+    }
+    public MyEvent findByEventName(String name) {
+        String sql = "SELECT * FROM event WHERE name = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{name}, new EventRowMapper());
+    }
 }
