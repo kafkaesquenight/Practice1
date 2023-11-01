@@ -2,6 +2,7 @@ package pan.eduard.Practice1;
 
 import jakarta.transaction.TransactionManager;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,19 +23,22 @@ import javax.sql.DataSource;
 public class MyConfiguration {
     @Value("${value.from.application:default}:")
     private String value;
-    @Bean
-    public DataSource dataSource() {
-        //create a data source
-    }
-
+    @Bean    public DataSource getDataSource() {
+        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        dataSourceBuilder.driverClassName("org.h2.Driver");
+        dataSourceBuilder.url("jdbc:h2:mem:test");
+        dataSourceBuilder.username("SA");
+        dataSourceBuilder.password("");
+        return dataSourceBuilder.build();    }
     @Bean
     public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
+        JdbcTemplate jdbcTemplate = new JdbcTemplate();
+        jdbcTemplate.setDataSource(getDataSource());
+        return jdbcTemplate;
     }
-
     @Bean
     public TransactionManager transactionManager() {
-        return (TransactionManager) new DataSourceTransactionManager(dataSource());
+        return (TransactionManager) new DataSourceTransactionManager(getDataSource());
     }
     @Bean("serviceAFromConfiguration")
     public ServiceA getServiceA(){
