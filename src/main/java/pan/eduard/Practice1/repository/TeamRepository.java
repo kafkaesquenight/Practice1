@@ -2,7 +2,6 @@ package pan.eduard.Practice1.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import pan.eduard.Practice1.domain.Player;
 import pan.eduard.Practice1.domain.Team;
 
 import javax.sql.DataSource;
@@ -27,7 +26,7 @@ public class TeamRepository {
         return teams;
     }
 
-    public void insertTeam() throws SQLException {
+    public void insertTeam(String name) throws SQLException {
         Connection conn = dataSource.getConnection();
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO team(name) VALUES (?)");
         stmt.setString(1, name);

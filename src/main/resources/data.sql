@@ -1,10 +1,10 @@
 INSERT INTO player (id, nickname, first_name, last_name, team_id)
 VALUES
     (1, 's1mple', 'Oleksandr', 'Kostyliev', 1),
-    (1, 'electronic', 'Denis', 'Sharipov', 1),
-    (1, 'Boombl4', 'Egor', 'Vasilyev', 1),
-    (1, 'flamie', 'Egor', 'Vasilev', 1),
-    (1, 'B1T', 'Egor', 'Vasilev', 1);
+    (2, 'electronic', 'Denis', 'Sharipov', 1),
+    (3, 'Boombl4', 'Egor', 'Vasilyev', 1),
+    (4, 'flamie', 'Egor', 'Vasilev', 1),
+    (5, 'B1T', 'Egor', 'Vasilev', 1);
 INSERT INTO team (id, name)
 VALUES
     (1, 'Astralis'),

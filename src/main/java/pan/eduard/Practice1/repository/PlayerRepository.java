@@ -30,7 +30,7 @@ public class PlayerRepository {
         return players;
     }
 
-    public void insertPlayer() throws SQLException {
+    public void insertPlayer(String nickname, String first_name, String last_name, int team_id) throws SQLException {
         Connection conn = dataSource.getConnection();
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO player(nickname, first_name, last_name, team_id) VALUES (?, ?, ?, ?)");
         stmt.setString(1, nickname);

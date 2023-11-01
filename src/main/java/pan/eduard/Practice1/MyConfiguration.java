@@ -19,26 +19,22 @@ import org.springframework.context.annotation.Bean;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource(value = "classpath:application.properties")
 public class MyConfiguration {
     @Value("${value.from.application:default}:")
     private String value;
-    @Bean    public DataSource getDataSource() {
+    @Bean
+    public DataSource dataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("org.h2.Driver");
-        dataSourceBuilder.url("jdbc:h2:mem:test");
+        dataSourceBuilder.url("jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE");
         dataSourceBuilder.username("SA");
         dataSourceBuilder.password("");
         return dataSourceBuilder.build();    }
     @Bean
     public JdbcTemplate jdbcTemplate() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
-        jdbcTemplate.setDataSource(getDataSource());
+        jdbcTemplate.setDataSource(dataSource());
         return jdbcTemplate;
-    }
-    @Bean
-    public TransactionManager transactionManager() {
-        return (TransactionManager) new DataSourceTransactionManager(getDataSource());
     }
     @Bean("serviceAFromConfiguration")
     public ServiceA getServiceA(){

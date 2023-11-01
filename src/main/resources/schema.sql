@@ -1,3 +1,8 @@
+drop table if exists player cascade;
+drop table if exists team cascade;
+drop table if exists my_event cascade;
+drop table if exists event_place cascade;
+
 CREATE TABLE player (
                         id INT PRIMARY KEY auto_increment,
                         nickname VARCHAR(255),
@@ -21,4 +26,3 @@ CREATE TABLE event_place (
                        country varchar(255),
                        city varchar(255)
 );
-
