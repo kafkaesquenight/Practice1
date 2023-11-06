@@ -1,12 +1,9 @@
 package pan.eduard.Practice1;
 
-import jakarta.transaction.TransactionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import pan.eduard.Practice1.service.ServiceA;
 import pan.eduard.Practice1.service.ServiceB;
 import pan.eduard.Practice1.service.ServiceC;
