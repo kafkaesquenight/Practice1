@@ -11,8 +11,12 @@ import java.util.List;
 
 @Repository
 public class EventPlaceRepository {
-    @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    public EventPlaceRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public List<EventPlace> findAll() {
 
         String sql = "SELECT * FROM event_place";
@@ -22,7 +26,7 @@ public class EventPlaceRepository {
         return eventPlaces;
 
     }
-    void insertEventPlace(String name, String country, String city) {
+    public void insertEventPlace(String name, String country, String city) {
         jdbcTemplate.update("INSERT INTO event_place (name, country, city) VALUES (?, ?, ?)", name, country, city
         );
     }

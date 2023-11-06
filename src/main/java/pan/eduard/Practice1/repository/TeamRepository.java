@@ -11,8 +11,13 @@ import java.util.List;
 
 @Repository
 public class TeamRepository {
-    @Autowired
+
     private DataSource dataSource;
+    @Autowired
+    public TeamRepository(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     public List<Team> getAllTeams() throws SQLException {
         Statement stmt = dataSource.getConnection().createStatement();
         ResultSet result = stmt.executeQuery("SELECT * from team");
