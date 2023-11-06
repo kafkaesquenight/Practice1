@@ -12,14 +12,19 @@ import java.util.List;
 
 @Repository
 public class EventRepository{
-    @Autowired
+
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    public EventRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public List<MyEvent> findAll() {
         String sql = "SELECT * FROM my_event";
         List<MyEvent> events = jdbcTemplate.query(sql, new EventRowMapper());
         return events;
     }
-    void insertEvent(String name, Date date, int event_id) {
+    public void insertEvent(String name, Date date, int event_id) {
         jdbcTemplate.update("INSERT INTO my_event (name, date) VALUES (?, ?)", name, date
         );
     }
