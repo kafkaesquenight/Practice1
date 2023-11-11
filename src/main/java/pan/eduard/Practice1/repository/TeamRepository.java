@@ -59,7 +59,7 @@ public class TeamRepository {
 
     public Team findTeamByName(String n) throws SQLException {
         Statement stmt = dataSource.getConnection().createStatement();
-        String query = "SELECT * from team WHERE name = " + n;
+        String query = "SELECT * from team WHERE name = '" + n + "'";
         ResultSet result = stmt.executeQuery(query);
         while (result.next()) {
             int id = result.getInt("id");
