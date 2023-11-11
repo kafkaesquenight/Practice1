@@ -7,6 +7,7 @@ import pan.eduard.Practice1.Mapper.EventRowMapper;
 import pan.eduard.Practice1.domain.MyEvent;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -24,8 +25,8 @@ public class EventRepository{
         List<MyEvent> events = jdbcTemplate.query(sql, new EventRowMapper());
         return events;
     }
-    public void insertEvent(String name, Date date, int event_id) {
-        jdbcTemplate.update("INSERT INTO my_event (name, date) VALUES (?, ?)", name, date
+    public void insertEvent(String name, LocalDate date, int event_id) {
+        jdbcTemplate.update("INSERT INTO my_event (id, name, date) VALUES (?, ?, ?)", event_id, name, date
         );
     }
     public boolean deleteEvent(int id){

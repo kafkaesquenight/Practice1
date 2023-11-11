@@ -26,8 +26,8 @@ public class EventPlaceRepository {
         return eventPlaces;
 
     }
-    public void insertEventPlace(String name, String country, String city) {
-        jdbcTemplate.update("INSERT INTO event_place (name, country, city) VALUES (?, ?, ?)", name, country, city
+    public void insertEventPlace(int id, String name, String country, String city) {
+        jdbcTemplate.update("INSERT INTO event_place (id, name, country, city) VALUES (?, ?, ?, ?)", id, name, country, city
         );
     }
     public boolean deleteEventPlace(int id){

@@ -6,6 +6,7 @@ import pan.eduard.Practice1.domain.MyEvent;
 import pan.eduard.Practice1.repository.EventRepository;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -19,7 +20,7 @@ public class EventService {
     public List<MyEvent> getEvents() {
         return eventRepository.findAll();
     }
-    public void addEvent(String name, Date date, int event_id){
+    public void addEvent(String name, LocalDate date, int event_id){
         eventRepository.insertEvent(name, date, event_id);
     }
     public void removeEvent(int event_id){

@@ -21,40 +21,32 @@ public class PlayerService {
         this.playerRepository = playerRepository;
     }
 
-    public List<Player> getPlayers() {
+    public List<Player> findAll(){
         try {
-            return playerRepository.getAllPlayers();
+            return playerRepository.getPlayers();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void addPlayer(String nickname, String first_name, String last_name, int team_id){
+    public void addPlayer(int id, String nickname, String first_name, String last_name, int team_id){
         try {
-            playerRepository.insertPlayer(nickname, first_name, last_name, team_id);
+            playerRepository.insertPlayer(id, nickname, first_name, last_name, team_id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void removePlayer(int id){
-        try {
-            playerRepository.deletePlayerById(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public Player findPlayerById(int id) {
+    public Player findPlayerById(int id){
         try {
             return playerRepository.findPlayerById(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public Player findPLayerByFirstName(String first_name) {
+    public Player findPlayerByNickname(String nickname){
         try {
-            return playerRepository.findPlayerByFirstName(first_name);
+            return playerRepository.findPlayerByNickname(nickname);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
 }

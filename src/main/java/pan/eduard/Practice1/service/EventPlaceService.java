@@ -22,8 +22,8 @@ public class EventPlaceService {
     public List<EventPlace> getEventPlaces() {
         return eventPlaceRepository.findAll();
     }
-    public void addEventPlace(String name, String country, String city){
-        eventPlaceRepository.insertEventPlace(name, country, city);
+    public void addEventPlace(int id, String name, String country, String city){
+        eventPlaceRepository.insertEventPlace(id, name, country, city);
     }
     public void removeEventPlace(int id){
         eventPlaceRepository.deleteEventPlace(id);
