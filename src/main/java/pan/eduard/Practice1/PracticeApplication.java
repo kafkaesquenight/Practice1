@@ -6,10 +6,8 @@ import org.springframework.boot.SpringApplication;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import pan.eduard.Practice1.service.EventPlaceService;
-import pan.eduard.Practice1.service.EventService;
-import pan.eduard.Practice1.service.PlayerService;
-import pan.eduard.Practice1.service.ServiceD;
+import pan.eduard.Practice1.domain.Team;
+import pan.eduard.Practice1.service.*;
 
 import java.time.LocalDate;
 
@@ -33,9 +31,16 @@ public class PracticeApplication {
 		log.info("findEventPlaceByName Fox Theatre in database: {}", eventPlaceService.findEventPlaceByName("Fox Theatre"));
 		PlayerService playerService = ctx.getBean("playerService", PlayerService.class);
 		playerService.addPlayer(6, "dev1ce", "Nicolai", "Reedtz", 1);
+		playerService.deletePlayer(4);
 		log.info("Players in database: {}", playerService.findAll());
 		log.info("findPlayerById 3 in database: {}", playerService.findPlayerById(3));
-		log.info("findPlayerByNickname dev1ce in database: {}", playerService.findPlayerByNickname("dev1ce"));
+		log.info("findPlayerByTeamId 1 in database: {}", playerService.findPlayerByTeamId(1));
+		TeamService teamService = ctx.getBean("teamService", TeamService.class);
+		teamService.addTeam(6, "Balls");
+		teamService.removeTeam(6);
+		log.info("Teams in database: {}", teamService.getTeams());
+		log.info("findTeamById 1 in database: {}", teamService.findTeamById(1));
+		log.info("findTeamByName Astralis in database: {}", teamService.findTeamByName("Astralis"));
 	}
 }
 

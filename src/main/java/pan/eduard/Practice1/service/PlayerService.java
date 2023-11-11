@@ -35,6 +35,13 @@ public class PlayerService {
             throw new RuntimeException(e);
         }
     }
+    public void deletePlayer(int id){
+        try {
+            playerRepository.removePlayer(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public Player findPlayerById(int id){
         try {
             return playerRepository.findPlayerById(id);
@@ -42,9 +49,9 @@ public class PlayerService {
             throw new RuntimeException(e);
         }
     }
-    public Player findPlayerByNickname(String nickname){
+    public List<Player> findPlayerByTeamId(int id){
         try {
-            return playerRepository.findPlayerByNickname(nickname);
+            return playerRepository.findPlayerByTeamId(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

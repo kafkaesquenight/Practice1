@@ -25,9 +25,9 @@ public class TeamService {
             throw new RuntimeException(e);
         }
     }
-    public void addTeam(String name){
+    public void addTeam(int id, String name){
         try {
-            teamRepository.insertTeam(name);
+            teamRepository.insertTeam(id, name);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
