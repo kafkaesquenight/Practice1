@@ -1,26 +1,22 @@
-drop table if exists player cascade;
-drop table if exists team cascade;
-drop table if exists my_event cascade;
-drop table if exists event_place cascade;
 
-CREATE TABLE player (
+CREATE TABLE if not exists player(
                         id INT PRIMARY KEY auto_increment,
                         nickname VARCHAR(255),
                         first_name VARCHAR(255),
                         last_name VARCHAR(255),
                         team_id INT
 );
-CREATE TABLE team (
+CREATE TABLE if not exists team (
                        id INT PRIMARY KEY auto_increment,
                        name VARCHAR(255)
 );
-CREATE TABLE my_event (
+CREATE TABLE if not exists my_event (
                        id INT PRIMARY KEY auto_increment,
                        name varchar(255),
                        date date,
                        place_id INT
 );
-CREATE TABLE event_place (
+CREATE TABLE if not exists event_place (
                        id INT PRIMARY KEY auto_increment,
                        name varchar(255),
                        country varchar(255),

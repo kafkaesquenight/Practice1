@@ -6,12 +6,16 @@ import org.springframework.boot.SpringApplication;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import pan.eduard.Practice1.service.EventService;
 import pan.eduard.Practice1.service.PlayerService;
 import pan.eduard.Practice1.service.ServiceD;
 
 @SpringBootApplication
 @Slf4j
+@EnableTransactionManagement
+@EnableJpaRepositories
 public class PracticeApplication {
 
 	public static void main(String[] args) {
