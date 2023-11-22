@@ -18,40 +18,21 @@ public class TeamService {
     public TeamService(TeamRepository teamRepository) {
         this.teamRepository = teamRepository;
     }
+
     public List<Team> getTeams() {
-        try {
-            return teamRepository.getAllTeams();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return teamRepository.findAllTeamsNative();
     }
     public void addTeam(int id, String name){
-        try {
-            teamRepository.insertTeam(id, name);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        teamRepository.insertTeam(id, name);
     }
-    public void removeTeam(int id){
-        try {
-            teamRepository.deleteTeamById(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public void removeTeamById(int id){
+        teamRepository.deleteById(id);
     }
     public Team findTeamById(int id) {
-        try {
-            return teamRepository.findTeamById(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return teamRepository.retrieveById(id);
     }
-    public Team findTeamByName(String name) {
-        try {
-            return teamRepository.findTeamByName(name);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public Team findTeamByName(String first_name) {
+        return teamRepository.retrieveByName(first_name);
     }
 
 }

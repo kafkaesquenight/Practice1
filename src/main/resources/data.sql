@@ -12,13 +12,13 @@ VALUES
     (3, 'Vitality'),
     (4, 'G2 Esports'),
     (5, 'Team Liquid');
-INSERT INTO my_event (id, name, date)
+INSERT INTO my_event (id, name, date, place_id)
 VALUES
-    (1, 'ELEAGUE Major: Atlanta 2017', '2017-01-22'),
-    (2, 'PGL Major Kraków 2017', '2017-07-16'),
-    (3, 'ELEAGUE Major: Boston 2018', '2018-01-12'),
-    (4, 'FACEIT Major: London 2018', '2018-09-05'),
-    (5, 'IEM Katowice 2019', '2019-02-14');
+    (1, 'ELEAGUE Major: Atlanta 2017', '2017-01-22', 1),
+    (2, 'PGL Major Kraków 2017', '2017-07-16', 2),
+    (3, 'ELEAGUE Major: Boston 2018', '2018-01-12', 3),
+    (4, 'FACEIT Major: London 2018', '2018-09-05', 4),
+    (5, 'IEM Katowice 2019', '2019-02-14', 5);
 INSERT INTO event_place (id, name, country, city)
 VALUES
     (1, 'Fox Theatre', 'United States', 'Atlanta'),

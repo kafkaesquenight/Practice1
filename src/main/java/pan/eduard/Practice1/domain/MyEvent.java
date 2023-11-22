@@ -18,14 +18,14 @@ public class MyEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
     @Column(name = "date")
     private Date date;
     @Column(name = "place_id")
-    private int place_id;
+    private Integer place_id;
     @ManyToOne
     @JoinColumn(name = "event_place_id")
     @JsonIgnore

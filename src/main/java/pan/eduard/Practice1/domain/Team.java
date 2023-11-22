@@ -22,7 +22,7 @@ public class Team {
 
     @Column(name = "name")
     private String name;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "team")
     private List<Player> players = new ArrayList<>();
 
     public int getTeamId() {

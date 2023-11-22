@@ -26,7 +26,7 @@ public class EventPlace {
     private String country;
     @Column(name = "city")
     private String city;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "eventPlace")
     private List<MyEvent> events = new ArrayList<>();
 
     public int getPlaceId() {

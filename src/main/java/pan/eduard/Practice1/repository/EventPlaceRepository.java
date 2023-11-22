@@ -1,47 +1,35 @@
 package pan.eduard.Practice1.repository;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pan.eduard.Practice1.Mapper.EventPlaceRowMapper;
 import pan.eduard.Practice1.domain.EventPlace;
 import java.util.List;
 
 
 @Repository
-public class EventPlaceRepository {
-    private JdbcTemplate jdbcTemplate;
-    @Autowired
-    public EventPlaceRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+public interface EventPlaceRepository extends JpaRepository<EventPlace, Long> {
+    EventPlace findEventPlaceByNameContainingIgnoreCase(String name);
 
-    public List<EventPlace> findAll() {
+    @Query("SELECT ep from EventPlace ep WHERE LOWER(ep.name) = LOWER(:name)")
+    EventPlace retrieveByName(@Param("name") String name);
+    @org.springframework.transaction.annotation.Transactional
+    void deleteById(int id);
 
-        String sql = "SELECT * FROM event_place";
+    @Modifying
+    @Transactional
+    @Query(value = "insert into event_place (id, name, country, city) VALUES (?, ?, ?, ?)", nativeQuery = true)
+    void insertEventPlace(int id, String name, String country, String city);
 
-        List<EventPlace> eventPlaces = jdbcTemplate.query(sql, new EventPlaceRowMapper());
+    @Query(
+            value = "SELECT * from event_place ep",
+            nativeQuery = true)
+    List<EventPlace> findAllEventPlaceNative();
 
-        return eventPlaces;
-
-    }
-    public void insertEventPlace(int id, String name, String country, String city) {
-        jdbcTemplate.update("INSERT INTO event_place (id, name, country, city) VALUES (?, ?, ?, ?)", id, name, country, city
-        );
-    }
-    public boolean deleteEventPlace(int id){
-        String sql = "DELETE FROM event_place WHERE id = ?";
-        Object[] args = new Object[] {id};
-        return jdbcTemplate.update(sql, args) == 1;
-    }
-    public EventPlace findByEventPlaceId(int id) {
-        String sql = "SELECT * FROM event_place WHERE id = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{id}, new EventPlaceRowMapper());
-    }
-    public EventPlace findByEventPlaceName(String name) {
-        String sql = "SELECT * FROM event_place WHERE name = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{name}, new EventPlaceRowMapper());
-    }
+    @Query("SELECT ep from EventPlace ep WHERE ep.id = :id")
+    EventPlace retrieveById(@Param("id") int id);
 
 }
