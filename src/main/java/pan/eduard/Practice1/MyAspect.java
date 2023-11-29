@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class MyAspect {
-    @Before("execution(* pan.eduard.Practice1.service.ServiceD.*(..))")
+    @Before("execution(* pan.eduard.Practice1.service.EventService.*(..))")
     public void logBefore(JoinPoint joinPoint) {
         log.info("logBefore called. Method name: " + joinPoint.getSignature().toShortString());
     }
