@@ -1,5 +1,6 @@
 package pan.eduard.Practice1.service;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,9 @@ public class EventPlaceService {
     public List<EventPlace> getEventPlaces() {
         return eventPlaceRepository.findAllEventPlaceNative();
     }
-    public void addEventPlace(int id, String name, String country, String city){
-        eventPlaceRepository.insertEventPlace(id, name, country, city);
+    public void addEventPlace(String name, String country, String city){
+        EventPlace ep = EventPlace.builder().name(name).country(country).city(city).build();
+        eventPlaceRepository.save(ep);
     }
     public void removeEventPlace(int id){
         eventPlaceRepository.deleteById(id);
@@ -31,5 +33,8 @@ public class EventPlaceService {
     public EventPlace findEventPlaceByName(String name) {
         return eventPlaceRepository.retrieveByName(name);
     }
-
+    @Transactional
+    public void truncateTable() {
+        eventPlaceRepository.truncateTable();
+    }
 }

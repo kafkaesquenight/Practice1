@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.minidev.json.annotate.JsonIgnore;
 
+import java.time.LocalDate;
 import java.util.Date;
 @Data
 @Builder
@@ -17,25 +18,25 @@ import java.util.Date;
 public class MyEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    @Column(name="id", nullable=false, updatable=false)
+    private Long id;
 
     @Column(name = "name")
     private String name;
     @Column(name = "date")
-    private Date date;
-    @Column(name = "place_id")
+    private LocalDate date;
+    @Column(name = "place_id", insertable = false, updatable = false)
     private Integer place_id;
     @ManyToOne
-    @JoinColumn(name = "event_place_id")
+    @JoinColumn(name = "place_id")
     @JsonIgnore
     private EventPlace eventPlace;
 
-    public int getEventId() {
+    public Long getEventId() {
         return id;
     }
 
-    public void setEventId(int id) {
+    public void setEventId(Long id) {
         this.id = id;
     }
 
@@ -47,15 +48,15 @@ public class MyEvent {
         this.name = name;
     }
 
-    public Date getEventDate() {
+    public LocalDate getEventDate() {
         return date;
     }
 
-    public void setEventDate(Date date) {
+    public void setEventDate(LocalDate date) {
         this.date = date;
     }
 
-    public int getPlace_id() {
+    public Integer getPlace_id() {
         return place_id;
     }
 

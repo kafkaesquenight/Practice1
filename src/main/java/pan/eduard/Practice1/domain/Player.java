@@ -15,40 +15,31 @@ import net.minidev.json.annotate.JsonIgnore;
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "name")
-    private String name;
+    @Column(name="id", nullable=false, updatable=false)
+    private Long id;
     @Column(name = "nickname")
     private String nickname;
     @Column(name = "first_name")
     private String first_name;
     @Column(name = "last_name")
     private String last_name;
-    @Column(name = "team_id")
-    private int team_id;
+    @Column(name = "team_id", insertable = false, updatable = false)
+    private Integer team_id;
 
     @ManyToOne
-    @JoinColumn(name = "player_team_id")
+    @JoinColumn(name = "team_id")
     @JsonIgnore
     private Team team;
 
-    public int getPlayerId() {
+    public Long getPlayerId() {
         return id;
     }
 
-    public void setPlayerId(int id) {
+    public void setPlayerId(Long id) {
         this.id = id;
     }
 
-    public String getPlayerName() {
-        return name;
-    }
 
-    public void setPlayerName(String name) {
-        this.name = name;
-    }
 
     public String getPlayerNickname() {
         return nickname;
@@ -70,11 +61,11 @@ public class Player {
         return last_name;
     }
 
-    public int getTeam_id() {
+    public Integer getTeam_id() {
         return team_id;
     }
 
-    public void setTeam_id(int team_id) {
+    public void setTeam_id(Integer team_id) {
         this.team_id = team_id;
     }
 

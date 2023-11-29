@@ -19,10 +19,6 @@ public interface EventPlaceRepository extends JpaRepository<EventPlace, Long> {
     @org.springframework.transaction.annotation.Transactional
     void deleteById(int id);
 
-    @Modifying
-    @Transactional
-    @Query(value = "insert into event_place (id, name, country, city) VALUES (?, ?, ?, ?)", nativeQuery = true)
-    void insertEventPlace(int id, String name, String country, String city);
 
     @Query(
             value = "SELECT * from event_place ep",
@@ -31,5 +27,10 @@ public interface EventPlaceRepository extends JpaRepository<EventPlace, Long> {
 
     @Query("SELECT ep from EventPlace ep WHERE ep.id = :id")
     EventPlace retrieveById(@Param("id") int id);
-
+    @Modifying
+    @Query(
+            value = "truncate table event_place",
+            nativeQuery = true
+    )
+    void truncateTable();
 }

@@ -17,19 +17,19 @@ import java.util.List;
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    @Column(columnDefinition = "serial")
+    private Long id;
 
     @Column(name = "name")
     private String name;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "team")
     private List<Player> players = new ArrayList<>();
 
-    public int getTeamId() {
+    public Long getTeamId() {
         return id;
     }
 
-    public void setTeamId(int id) {
+    public void setTeamId(Long id) {
         this.id = id;
     }
 

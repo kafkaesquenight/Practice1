@@ -17,8 +17,8 @@ import java.util.List;
 public class EventPlace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    @Column(name="id", nullable=false, updatable=false)
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -29,11 +29,11 @@ public class EventPlace {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "eventPlace")
     private List<MyEvent> events = new ArrayList<>();
 
-    public int getPlaceId() {
+    public Long getPlaceId() {
         return id;
     }
 
-    public void setPlaceId(int id) {
+    public void setPlaceId(Long id) {
         this.id = id;
     }
 

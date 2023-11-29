@@ -20,8 +20,9 @@ public class PlayerService {
     public List<Player> getPlayers() {
         return playerRepository.findAllPlayersNative();
     }
-    public void addPlayer(int id, String nickname, String first_name, String last_name, int team_id){
-        playerRepository.insertPlayer(id, nickname, first_name, last_name, team_id);
+    public void addPlayer(String nickname, String first_name, String last_name, int team_id){
+        Player player = Player.builder().nickname(nickname).first_name(first_name).last_name(last_name).team_id(team_id).build();
+        playerRepository.save(player);
     }
     public void removePlayerById(int id){
         playerRepository.deleteById(id);

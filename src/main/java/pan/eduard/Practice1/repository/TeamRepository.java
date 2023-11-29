@@ -29,4 +29,11 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
 
     @Query("SELECT t from Team t WHERE t.id = :id")
     Team retrieveById(@Param("id") int id);
+
+    @Modifying
+    @Query(
+            value = "truncate table team",
+            nativeQuery = true
+    )
+    void truncateTable();
 }
